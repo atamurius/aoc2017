@@ -21,19 +21,30 @@ package object aoc2017 {
       printResult("Part 2", part2(input), part2Answer)
     }
 
+    private def esc(modes: Int*)(content: String) =
+      "\u001b[" + (modes mkString ";") +"m" + content + "\u001b[0m"
+
     private def printResult(part: String, actual: => Any, expected: => Any): Unit = {
+      val red = esc(1, 31) _
+      val darkRed = esc(31) _
+      val green = esc(32) _
+      val yellow = esc(33) _
+      val gray = esc(37) _
       (Try(actual), Try(expected)) match {
         case (Failure(e), _) =>
-          println(s"[FAILURE] $part: ${e.getMessage}")
           if (! e.isInstanceOf[NotImplemented]) {
+            println(red(s"[FAILURE] $part: ${e.getMessage}"))
             e.printStackTrace()
+          } else {
+            println(gray(s"[FAILURE] $part: ${e.getMessage}"))
           }
         case (Success(res), Failure(_ : NotImplemented)) =>
-          println(s"[RESULT] $part: $res")
+          println(yellow(s"[RESULT] $part: $res"))
         case (Success(res), Success(exp)) if res != exp =>
-          println(s"[FAILURE] $part: Unexpected result:\n$res\nExpected: $exp")
+          println(red(s"[FAILURE] $part: Unexpected result:)"))
+          println(darkRed(s"\tActual  : $res\n\tExpected: $exp"))
         case (Success(res), _) =>
-          println(s"[SUCCESS] $part: $res")
+          println(green(s"[SUCCESS] $part: $res"))
       }
     }
   }
