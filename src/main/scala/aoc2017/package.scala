@@ -1,8 +1,15 @@
+import java.nio.file.Path
+
+import scala.io.Source
 import scala.util.{Failure, Success, Try}
 
 package object aoc2017 {
 
   class NotImplemented extends Exception("Not implemented")
+
+  private def esc(modes: Int*)(content: String) =
+    "\u001b[" + (modes mkString ";") +"m" + content + "\u001b[0m"
+
 
   trait Puzzle {
 
@@ -10,6 +17,9 @@ package object aoc2017 {
     type Output
 
     val input: Input
+
+    protected def linesOf(name: String): Iterator[String] =
+      Source.fromFile(s"src/main/scala/aoc2017/$name").getLines()
 
     lazy val part1Answer: Output = throw new NotImplemented
     def part1(input: Input): Output = throw new NotImplemented
@@ -20,9 +30,6 @@ package object aoc2017 {
       printResult("Part 1", part1(input), part1Answer)
       printResult("Part 2", part2(input), part2Answer)
     }
-
-    private def esc(modes: Int*)(content: String) =
-      "\u001b[" + (modes mkString ";") +"m" + content + "\u001b[0m"
 
     private def printResult(part: String, actual: => Any, expected: => Any): Unit = {
       val red = esc(1, 31) _
@@ -45,6 +52,14 @@ package object aoc2017 {
           println(darkRed(s"\tActual  : $res\n\tExpected: $exp"))
         case (Success(res), _) =>
           println(green(s"[SUCCESS] $part: $res"))
+      }
+    }
+  }
+
+  implicit class Expectation(val value: Any) extends AnyVal {
+    def === (other: Any): Unit = {
+      if (value != other) {
+        println(esc(31)(s"[TEST FAILED] $value != $other"))
       }
     }
   }
