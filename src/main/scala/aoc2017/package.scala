@@ -63,4 +63,15 @@ package object aoc2017 {
       }
     }
   }
+
+  private var logging = false
+
+  def logged[T](value: => T): T = try {
+    logging = true
+    value
+  } finally {
+    logging = false
+  }
+
+  def log(msg: => String): Unit = if (logging) println("[LOG] " + msg)
 }
