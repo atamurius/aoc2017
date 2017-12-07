@@ -9,8 +9,6 @@ object Day04 extends Puzzle {
 
   override def part1(input: Seq[Seq[String]]): Int = input count valid
 
-  override lazy val part1Answer: Int = 466
-
   private def valid(phrase: Seq[String]) =
     phrase.foldLeft(Map.empty[String, Int] withDefaultValue 0) { (map, word) =>
       map updated (word, map(word) + 1)
@@ -21,8 +19,6 @@ object Day04 extends Puzzle {
   valid("aa bb cc dd ee aaa" split " ") === true
 
   override def part2(input: Seq[Seq[String]]): Int = input count valid2
-
-  override lazy val part2Answer: Int = 251
 
   private def anagramize(word: String): String = word.sorted
 

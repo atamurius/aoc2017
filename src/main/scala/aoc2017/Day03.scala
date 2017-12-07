@@ -16,8 +16,6 @@ object Day03 extends Puzzle {
    */
   override def part1(input: Int): Int = manhattan(input)
 
-  override lazy val part1Answer: Int = 326
-
   private def squareSide(n: Int, q: Int = 1): Int =
     if (q*q >= n) q
     else squareSide(n, q + 2)
@@ -64,8 +62,6 @@ object Day03 extends Puzzle {
    *  What is the first value written that is larger than your puzzle input?
    */
   override def part2(input: Int): Int = iterateUntil { _ > input }
-
-  override lazy val part2Answer: Int = 363010
 
   private class Cursor {
     var x: Int = 0

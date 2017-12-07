@@ -44,8 +44,6 @@ object Day06 extends Puzzle {
 
   override def part1(input: Seq[Int]): Int = cycleLength(input)._1
 
-  override lazy val part1Answer: Int = 7864
-
   private def nextCycleLength(banks: Seq[Int]): Int = {
     val (_, stable) = cycleLength(banks)
     cycleLength(stable)._1
@@ -54,6 +52,4 @@ object Day06 extends Puzzle {
   nextCycleLength(Seq(0, 2, 7, 0)) === 4
 
   override def part2(input: Seq[Int]): Int = nextCycleLength(input)
-
-  override lazy val part2Answer: Int = 1695
 }

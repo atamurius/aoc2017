@@ -9,8 +9,6 @@ object Day05 extends Puzzle {
 
   override def part1(input: Seq[Int]): Int = countToExit(new Program(input))
 
-  override lazy val part1Answer: Int = 388611
-
   private class Program(initial: Seq[Int], mutate: Int => Int = _ + 1) {
     private val jumps = initial.to[collection.mutable.ArrayBuffer]
     private var position = 0
@@ -44,8 +42,6 @@ object Day05 extends Puzzle {
   countToExit(new Program(testSeq)) === 5
 
   override def part2(input: Seq[Int]): Int = countToExit(new Program(input, decThree))
-
-  override lazy val part2Answer: Int = 27763113
 
   private def decThree(n: Int) = if (n >= 3) n - 1 else n + 1
 

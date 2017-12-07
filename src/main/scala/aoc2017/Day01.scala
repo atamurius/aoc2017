@@ -19,16 +19,13 @@ object Day01 extends Puzzle {
     .collect { case Seq(x, y) if x == y => x }
     .sum
 
-  override lazy val part1Answer: Int = 1102
-
   /**
    * Now, instead of considering the next digit, it wants you to consider the digit
    * halfway around the circular list.
    */
   override def part2(input: Seq[Int]): Int = {
-    def halfway(i: Int): Int = input((i + input.size/2) % input.size)
+    def halfway(i: Int): Int = input((i + input.size / 2) % input.size)
+
     input.zipWithIndex.collect { case (x, i) if x == halfway(i) => x }.sum
   }
-
-  override lazy val part2Answer: Int = 1076
 }

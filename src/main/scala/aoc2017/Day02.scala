@@ -13,8 +13,6 @@ object Day02 extends Puzzle {
    */
   override def part1(input: Seq[Seq[Int]]): Int = input.map { row => row.max - row.min }.sum
 
-  override lazy val part1Answer = 42378
-
   /**
    * It sounds like the goal is to find the only two numbers in each row where one evenly divides
    * the other - that is, where the result of the division operation is a whole number.
@@ -34,6 +32,4 @@ object Day02 extends Puzzle {
   part2RowValue(Seq(5, 9, 2, 8)) === 4
   part2RowValue(Seq(9, 4, 7, 3)) === 3
   part2RowValue(Seq(3, 8, 6, 5)) === 2
-
-  override lazy val part2Answer = 246
 }
