@@ -3,7 +3,6 @@ package aoc2017
 object Day09 extends Puzzle {
 
   override type Input = String
-  override type Output = Int
 
   override val input: String = linesOf("Day09.input").next()
 
@@ -85,12 +84,12 @@ object Day09 extends Puzzle {
     case _ => 0
   }
 
-  override def part1(input: String): Int = score(1)(Piece(input))
+  override def part1(input: String): Any = score(1)(Piece(input))
 
   private def garbageLen(piece: Piece): Int = piece match {
     case Group(ps @ _*) => (ps map garbageLen).sum
     case Garbage(c) => c.length
   }
 
-  override def part2(input: String): Int = garbageLen(Piece(input))
+  override def part2(input: String): Any = garbageLen(Piece(input))
 }

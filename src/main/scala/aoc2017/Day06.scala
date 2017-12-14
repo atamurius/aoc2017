@@ -3,7 +3,6 @@ package aoc2017
 object Day06 extends Puzzle {
 
   override type Input = Seq[Int]
-  override type Output = Int
 
   override val input: Seq[Int] = Seq(0,	5,	10,	0,	11,	14,	13,	4,	11,	8,	8,	7,	1,	4,	12,	11)
 
@@ -42,7 +41,7 @@ object Day06 extends Puzzle {
 
   cycleLength(Seq(0, 2, 7, 0)) === (5, Seq(2, 4, 1, 2))
 
-  override def part1(input: Seq[Int]): Int = cycleLength(input)._1
+  override def part1(input: Seq[Int]): Any = cycleLength(input)._1
 
   private def nextCycleLength(banks: Seq[Int]): Int = {
     val (_, stable) = cycleLength(banks)
@@ -51,5 +50,5 @@ object Day06 extends Puzzle {
 
   nextCycleLength(Seq(0, 2, 7, 0)) === 4
 
-  override def part2(input: Seq[Int]): Int = nextCycleLength(input)
+  override def part2(input: Seq[Int]): Any = nextCycleLength(input)
 }

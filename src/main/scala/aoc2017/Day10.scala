@@ -5,7 +5,6 @@ import scala.annotation.tailrec
 object Day10 extends Puzzle {
 
   override type Input = Seq[Int]
-  override type Output = String
 
   override val input: Seq[Int] = Seq(94,84,0,79,2,27,81,1,123,93,218,23,103,255,254,243)
 
@@ -86,9 +85,9 @@ object Day10 extends Puzzle {
 
   hash(nums(5), Seq(3, 4, 1, 5)) === CircularArray(3, 4, 2, 1, 0)
 
-  override def part1(input: Seq[Int]): String = {
+  override def part1(input: Seq[Int]): Any = {
     val h = hash(nums(256), input)
-    (h(0) * h(1)).toString
+    h(0) * h(1)
   }
 
   private def codes(str: String): Seq[Int] = str.toCharArray.map(_.toInt)
@@ -122,5 +121,5 @@ object Day10 extends Puzzle {
   strongHash("1,2,3")     === "3efbe78a8d82f29979031a4aa0b16a9d"
   strongHash("1,2,4")     === "63960835bcdc130f0b66d7ff4f6a5a8e"
 
-  override def part2(input: Seq[Int]): String = strongHash(input.mkString(","))
+  override def part2(input: Seq[Int]): Any = strongHash(input.mkString(","))
 }

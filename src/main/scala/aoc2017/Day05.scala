@@ -3,11 +3,10 @@ package aoc2017
 object Day05 extends Puzzle {
 
   override type Input = Seq[Int]
-  override type Output = Int
 
   override val input: Seq[Int] = linesOf("Day05.input").map(_.toInt).toSeq
 
-  override def part1(input: Seq[Int]): Int = countToExit(new Program(input))
+  override def part1(input: Seq[Int]): Any = countToExit(new Program(input))
 
   private class Program(initial: Seq[Int], mutate: Int => Int = _ + 1) {
     private val jumps = initial.to[collection.mutable.ArrayBuffer]
@@ -41,7 +40,7 @@ object Day05 extends Puzzle {
 
   countToExit(new Program(testSeq)) === 5
 
-  override def part2(input: Seq[Int]): Int = countToExit(new Program(input, decThree))
+  override def part2(input: Seq[Int]): Any = countToExit(new Program(input, decThree))
 
   private def decThree(n: Int) = if (n >= 3) n - 1 else n + 1
 

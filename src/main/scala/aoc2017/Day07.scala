@@ -3,7 +3,6 @@ package aoc2017
 object Day07 extends Puzzle {
 
   override type Input = Seq[Record]
-  override type Output = String
 
   case class Record(name: String, weight: Int, hold: Seq[String])
 
@@ -54,7 +53,7 @@ object Day07 extends Puzzle {
 
   tree(testRecords).name === "tknk"
 
-  override def part1(input: Seq[Record]): String = tree(input).name
+  override def part1(input: Seq[Record]): Any = tree(input).name
 
   private def unbalanced(tree: Node): Either[Int, (Node, Int)] = { // either wight or unbalanced node
     val start: Either[Map[Node, Int], (Node, Int)] = Left(Map.empty)
@@ -84,5 +83,5 @@ object Day07 extends Puzzle {
     case (node, w) => node.name -> w
   } === Right("ugml" -> 60)
 
-  override def part2(input: Seq[Record]): String = unbalanced(tree(input)).right.get._2.toString
+  override def part2(input: Seq[Record]): Any = unbalanced(tree(input)).right.get._2
 }

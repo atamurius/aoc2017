@@ -14,15 +14,14 @@ package object aoc2017 {
   trait Puzzle {
 
     type Input
-    type Output
 
     val input: Input
 
     protected def linesOf(name: String): Iterator[String] =
       Source.fromFile(s"src/main/scala/aoc2017/$name").getLines()
 
-    def part1(input: Input): Output = throw new NotImplemented
-    def part2(input: Input): Output = throw new NotImplemented
+    def part1(input: Input): Any = throw new NotImplemented
+    def part2(input: Input): Any = throw new NotImplemented
 
     def main(args: Array[String]): Unit = {
       printResult("Part 1", part1(input))

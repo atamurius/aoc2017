@@ -6,7 +6,6 @@ import scala.util.Try
 object Day03 extends Puzzle {
 
   override type Input = Int
-  override type Output = Int
 
   override val input = 361527
 
@@ -14,7 +13,7 @@ object Day03 extends Puzzle {
    * Each square on the grid is allocated in a spiral pattern.
    * Find the Manhattan Distance between the location of the data and square 1.
    */
-  override def part1(input: Int): Int = manhattan(input)
+  override def part1(input: Int): Any = manhattan(input)
 
   private def squareSide(n: Int, q: Int = 1): Int =
     if (q*q >= n) q
@@ -61,7 +60,7 @@ object Day03 extends Puzzle {
    *  they store the sum of the values in all adjacent squares, including diagonals.
    *  What is the first value written that is larger than your puzzle input?
    */
-  override def part2(input: Int): Int = iterateUntil { _ > input }
+  override def part2(input: Int): Any = iterateUntil { _ > input }
 
   private class Cursor {
     var x: Int = 0

@@ -3,7 +3,6 @@ package aoc2017
 object Day08 extends Puzzle {
 
   override type Input = Seq[Instr]
-  override type Output = Int
 
   case class Instr(target: String, delta: Int, source: String, cond: Int => Boolean)
 
@@ -53,7 +52,7 @@ object Day08 extends Puzzle {
 
   execute(testData) === Map("c" -> -10, "a" -> 1)
 
-  override def part1(input: Seq[Instr]): Int = execute(input).values.max
+  override def part1(input: Seq[Instr]): Any = execute(input).values.max
 
   private def maxDuringExecution(instr: Seq[Instr]) = {
     val regs = Map.empty[String, Int] withDefaultValue 0
@@ -67,5 +66,5 @@ object Day08 extends Puzzle {
 
   maxDuringExecution(testData) === 10
 
-  override def part2(input: Seq[Instr]): Int = maxDuringExecution(input)
+  override def part2(input: Seq[Instr]): Any = maxDuringExecution(input)
 }

@@ -3,11 +3,10 @@ package aoc2017
 object Day04 extends Puzzle {
 
   override type Input = Seq[Seq[String]]
-  override type Output = Int
 
   override val input: Seq[Seq[String]] = linesOf("Day04.input").map { _.split("\\s+").toSeq }.toSeq
 
-  override def part1(input: Seq[Seq[String]]): Int = input count valid
+  override def part1(input: Seq[Seq[String]]): Any = input count valid
 
   private def valid(phrase: Seq[String]) =
     phrase.foldLeft(Map.empty[String, Int] withDefaultValue 0) { (map, word) =>
@@ -18,7 +17,7 @@ object Day04 extends Puzzle {
   valid("aa bb cc dd ee aa" split " ") === false
   valid("aa bb cc dd ee aaa" split " ") === true
 
-  override def part2(input: Seq[Seq[String]]): Int = input count valid2
+  override def part2(input: Seq[Seq[String]]): Any = input count valid2
 
   private def anagramize(word: String): String = word.sorted
 
