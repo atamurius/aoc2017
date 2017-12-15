@@ -1,5 +1,3 @@
-import java.nio.file.Path
-
 import scala.io.Source
 import scala.util.{Failure, Success, Try}
 
