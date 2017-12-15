@@ -104,7 +104,10 @@ object Day10 extends Puzzle {
 
   hexHash(Seq(1,2,3,4,5,6,7,8,9), 3) === Seq(1^2^3, 4^5^6, 7^8^9)
 
-  private def strongHash(str: String) = {
+  private def strongHash(str: String) =
+    knotHash(str).map { x => "%02x".format(x) }.mkString
+
+  def knotHash(str: String): Seq[Int] = {
     val lengths = codes(str) ++ postfix
     log(s"strongHash($lengths)")
     val l64 = (2 to 64).foldLeft(lengths) { (l, _) => l ++ lengths }
@@ -113,7 +116,7 @@ object Day10 extends Puzzle {
     log(s"hashed = $hashed")
     val hex = hexHash(hashed.toSeq)
     log(s"hex = $hex")
-    hex.map { x => "%02x".format(x) }.mkString
+    hex
   }
 
   strongHash("")          === "a2582a3a0e66e6e86e3812dcb672a272"
