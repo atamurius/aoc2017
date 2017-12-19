@@ -22,8 +22,23 @@ package object aoc2017 {
     def part2(input: Input): Any = throw new NotImplemented
 
     def main(args: Array[String]): Unit = {
-      printResult("Part 1", part1(input))
-      printResult("Part 2", part2(input))
+      timed {
+        printResult("Part 1", part1(input))
+      }
+      timed {
+        printResult("Part 2", part2(input))
+      }
+    }
+
+    protected def timed[T](f: => T): T = {
+      val start = System.currentTimeMillis
+      val result = f
+      val time = System.currentTimeMillis - start
+      if (time > 100) println(esc(37)("[TIME] %.3f%s".format(
+        if (time > 1000) time / 1000d else time.toDouble,
+        if (time > 1000) "s" else "ms"
+      )))
+      result
     }
 
     private def printResult(part: String, actual: => Any): Unit = {
