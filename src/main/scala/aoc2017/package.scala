@@ -15,6 +15,10 @@ package object aoc2017 {
 
     val input: Input
 
+    private var testSucceed = true
+
+    private var logging = false
+
     protected def linesOf(name: String): Iterator[String] =
       Source.fromFile(s"src/main/scala/aoc2017/$name").getLines()
 
@@ -22,11 +26,13 @@ package object aoc2017 {
     def part2(input: Input): Any = throw new NotImplemented
 
     def main(args: Array[String]): Unit = {
-      timed {
-        printResult("Part 1", part1(input))
-      }
-      timed {
-        printResult("Part 2", part2(input))
+      if (testSucceed) {
+        timed {
+          printResult("Part 1", part1(input))
+        }
+        timed {
+          printResult("Part 2", part2(input))
+        }
       }
     }
 
@@ -59,24 +65,25 @@ package object aoc2017 {
           println(yellow(s"[RESULT] $part: $res"))
       }
     }
+
+    implicit def expectation(value: Any): Expectation = new Expectation(value)(testSucceed = false)
+
+    def logged[T](value: => T): T = try {
+      logging = true
+      value
+    } finally {
+      logging = false
+    }
+
+    def log(msg: => String): Unit = if (logging) println("[LOG] " + msg)
   }
 
-  implicit class Expectation(val value: Any) extends AnyVal {
+  class Expectation(val value: Any)(onFailure: => Any) {
     def === (other: Any): Unit = {
       if (value != other) {
         println(esc(31)(s"[TEST FAILED] $value != $other"))
+        onFailure
       }
     }
   }
-
-  private var logging = false
-
-  def logged[T](value: => T): T = try {
-    logging = true
-    value
-  } finally {
-    logging = false
-  }
-
-  def log(msg: => String): Unit = if (logging) println("[LOG] " + msg)
 }
