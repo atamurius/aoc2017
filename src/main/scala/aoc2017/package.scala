@@ -75,7 +75,7 @@ package object aoc2017 {
       logging = false
     }
 
-    def log(msg: => String): Unit = if (logging) println("[LOG] " + msg)
+    def log(msg: => Any): Unit = if (logging) println("[LOG] " + msg)
   }
 
   class Expectation(val value: Any)(onFailure: => Any) {
