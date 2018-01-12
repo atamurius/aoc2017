@@ -17,7 +17,11 @@ object Day20 extends Puzzle {
       z = z + v.z
     )
 
-    def distanceFromCenter: Num = productIterator.asInstanceOf[Iterator[Num]].map(math.abs).sum
+    def components: Iterator[Num] = productIterator.asInstanceOf[Iterator[Num]]
+
+    def distanceFromCenter: Num = components.map(math.abs).sum
+
+    def distanceTo(v: Vec): Num = (components zip v.components).map { case (a, b) => math.abs(a - b) }.sum
   }
 
   case class Point(position: Vec,
@@ -44,6 +48,8 @@ object Day20 extends Puzzle {
       }
 
     def isLeaving: Boolean = isStable && isMovingOutside
+
+    def <~> (p: Point): Num = position distanceTo p.position
   }
 
   object Point {
@@ -100,4 +106,34 @@ object Day20 extends Puzzle {
 //  }
 
   override def part1(input: Seq[Point]): Any = findNearest(input)
+
+  private def clearCollisions(ps: Seq[Point]) = ps.groupBy(_.position).collect { case (_, Seq(p)) => p }.toSeq
+
+  @tailrec
+  private def stabilizeWithoutCollisions(ps: Seq[Point]): Seq[Point] = {
+    log("---------------")
+    val current = clearCollisions(ps)
+    current.foreach(log(_))
+    val next = current.map(_.next)
+    val dists = for {
+      (prev1, nx1) <- current.iterator zip next.iterator
+      (prev2, nx2) <- current.iterator zip next.iterator
+    } yield (prev1 <~> prev2) <= (nx1 <~> nx2)
+    if (current.exists(! _.isStable) || (dists contains false)) { // not all distances are growing
+      stabilizeWithoutCollisions(next)
+    } else {
+      clearCollisions(next)
+    }
+  }
+
+//  logged {
+    stabilizeWithoutCollisions(Seq(
+      Point(Vec(-6), Vec( 3), Vec(0)),
+      Point(Vec(-4), Vec( 2), Vec(0)),
+      Point(Vec(-2), Vec( 1), Vec(0)),
+      Point(Vec( 3), Vec(-1), Vec(0))
+    )).size === 1
+//  }
+
+  override def part2(input: Seq[Point]): Any = stabilizeWithoutCollisions(input).size
 }
