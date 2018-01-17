@@ -86,4 +86,12 @@ package object aoc2017 {
       }
     }
   }
+
+  implicit class Times(val n: Int) extends AnyVal {
+    def times[T](f: => Unit): Unit = (1 to n).foreach { _ => f }
+  }
+
+  implicit class TimesFold[T](val obj: T) extends AnyVal {
+    def times(n: Int)(f: T => T): T = (1 to n).foldLeft(obj) { (o, _) => f(o) }
+  }
 }
