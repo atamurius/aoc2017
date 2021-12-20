@@ -7,7 +7,7 @@ object Day03 extends Puzzle {
 
   override type Input = Int
 
-  override val input = 361527
+  override val input = 289326
 
   /**
    * Each square on the grid is allocated in a spiral pattern.

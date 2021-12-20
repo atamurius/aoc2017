@@ -122,7 +122,7 @@ object Day25 extends Puzzle {
         |    - Write the value 1.
         |    - Move one slot to the right.
         |    - Continue with state A.
-      """.stripMargin.trim.lines)).checksum === 3
+      """.stripMargin.trim.linesIterator)).checksum === 3
   }
 
   override def part1(input: Blueprint): Any = run(input).checksum

@@ -4,7 +4,9 @@ object Day15 extends Puzzle {
 
   override type Input = (Long, Long)
 
-  override val input: (Long, Long) = (634, 301)
+  //Generator A starts with 883
+  //Generator B starts with 879
+  override val input: (Long, Long) = (883, 879)
 
   private val factors = (16807, 48271) // 7^5, 48271
 

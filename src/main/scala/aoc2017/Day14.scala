@@ -4,7 +4,7 @@ object Day14 extends Puzzle {
 
   override type Input = String
 
-  override val input: String = "stpzcrnm"
+  override val input: String = "ugkiagan"
 
   import Day10.knotHash
 
@@ -29,7 +29,7 @@ object Day14 extends Puzzle {
       |##..#..#
       |.#...#..
       |##.#.##.
-    """.trim.stripMargin.lines.map {
+    """.trim.stripMargin.linesIterator.map {
       _.toCharArray.map { c =>
         if (c == '#') 1 else 0
       }.toArray

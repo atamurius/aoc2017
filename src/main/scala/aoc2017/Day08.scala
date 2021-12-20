@@ -48,7 +48,7 @@ object Day08 extends Puzzle {
       |a inc 1 if b < 5
       |c dec -10 if a >= 1
       |c inc -20 if c == 10
-    """.trim.stripMargin.lines.toSeq)
+    """.trim.stripMargin.linesIterator.toSeq)
 
   execute(testData) === Map("c" -> -10, "a" -> 1)
 

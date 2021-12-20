@@ -105,7 +105,7 @@ object Day23 extends Puzzle {
       |set b 1
       |sub a b
       |jnz a -1
-    """.stripMargin.trim.lines.map(parseCmd).toSeq
+    """.stripMargin.trim.linesIterator.map(parseCmd).toSeq
   )("Sub") === 5
 
   override def part1(input: Seq[Cmd]): Any = eval(input)("Mul")
@@ -198,34 +198,37 @@ object Day23 extends Puzzle {
   }
 
   /*
-[LOG] b := 99
+[LOG] b := 65
 [LOG] c := b
 [LOG] if a:
-[LOG]    b := b * 100 + 100000 // 109900
-[LOG]    c := b + 17000 // 126900
+[LOG]    b := b * 100 + 100000
+[LOG]    c := b + 17000
 [LOG]
-[LOG] label0: // 109900 to 126900 by 17 = 1000 times
-[LOG]
-[LOG] f := true
+[LOG] label0:
+[LOG] f := 1
 [LOG] d := 2
 [LOG]
-[LOG] do: // 2 to 109900 = 109898 times
+[LOG] do:
 [LOG]    e := 2
 [LOG]
-[LOG]    do: // 2 to 109900 = 109898 times
-[LOG]       if d * e == b:
-[LOG]          f := false
+[LOG]    do:
+[LOG]       g := d * e - b
+[LOG]       if not g:
+[LOG]          f := 0
 [LOG]
 [LOG]       e := e + 1
-[LOG]    while e != b
+[LOG]       g := e - b
+[LOG]    while g
 [LOG]
 [LOG]    d := d + 1
-[LOG] while d != b
+[LOG]    g := d - b
+[LOG] while g
 [LOG]
 [LOG] if not f:
-[LOG]    h := h + 1 // count of non-primes between 109900 and 126900 by 17
+[LOG]    h := h + 1
 [LOG]
-[LOG] if b != c:
+[LOG] g := b - c
+[LOG] if g:
 [LOG]    b := b + 17
 [LOG]    goto label0
 [LOG]
@@ -254,7 +257,8 @@ object Day23 extends Puzzle {
   */}
 
   override def part2(input: Seq[Cmd]): Any = {
-    val b = 99 * 100 + 100000
+    val Set(Reg('b'), Val(initial)) = input.head
+    val b = initial * 100 + 100000
     val c = b + 17000
     val primesInRange = primes
       .dropWhile { _ < b }

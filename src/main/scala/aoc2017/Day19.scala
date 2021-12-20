@@ -15,7 +15,7 @@ object Day19 extends Puzzle {
       |     |  |  |  D
       |     +B-+  +--+
       |
-    """.trim.stripMargin.lines.toSeq
+    """.trim.stripMargin.linesIterator.toSeq
 
   object Pipes {
     type Dir = (Int, Int)

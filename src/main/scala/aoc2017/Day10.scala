@@ -6,7 +6,7 @@ object Day10 extends Puzzle {
 
   override type Input = Seq[Int]
 
-  override val input: Seq[Int] = Seq(94,84,0,79,2,27,81,1,123,93,218,23,103,255,254,243)
+  override val input: Seq[Int] = Seq(189,1,111,246,254,2,0,120,215,93,255,50,84,15,94,62)
 
   class CircularArray[T: Manifest](val size: Int) {
     private val elements = new Array[T](size)

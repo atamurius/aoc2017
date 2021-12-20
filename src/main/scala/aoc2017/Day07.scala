@@ -31,7 +31,7 @@ object Day07 extends Puzzle {
       |ugml (68) -> gyxo, ebii, jptl
       |gyxo (61)
       |cntj (57)
-    """.trim.stripMargin.lines.toSeq)
+    """.trim.stripMargin.linesIterator.toSeq)
 
   case class Node(name: String,
                   weight: Int,

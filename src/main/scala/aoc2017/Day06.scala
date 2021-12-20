@@ -4,7 +4,7 @@ object Day06 extends Puzzle {
 
   override type Input = Seq[Int]
 
-  override val input: Seq[Int] = Seq(0,	5,	10,	0,	11,	14,	13,	4,	11,	8,	8,	7,	1,	4,	12,	11)
+  override val input: Seq[Int] = "10\t3\t15\t10\t5\t15\t5\t15\t9\t2\t5\t8\t5\t2\t3\t6".split("\\s").map(_.toInt)
 
   private def redistribute(banks: Seq[Int]): Seq[Int] = {
     val (amount, source) = banks.zipWithIndex.foldLeft(-1 -> -1) { (prev, curr) =>

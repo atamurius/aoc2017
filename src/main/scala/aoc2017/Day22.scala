@@ -125,7 +125,7 @@ object Day22 extends Puzzle {
       |..#
       |#..
       |...
-    """.stripMargin.trim.lines.toSeq
+    """.stripMargin.trim.linesIterator.toSeq
 
   { // test
     val v = new Virus(initialRules).configure(testMap)

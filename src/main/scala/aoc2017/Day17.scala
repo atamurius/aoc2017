@@ -4,7 +4,7 @@ object Day17 extends Puzzle {
 
   override type Input = Int
 
-  override val input = 354
+  override val input = 363
 
   trait BufferLike {
     def size: Int

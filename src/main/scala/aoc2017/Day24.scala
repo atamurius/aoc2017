@@ -66,7 +66,7 @@ object Day24 extends Puzzle {
         |0/1
         |10/1
         |9/10
-      """.stripMargin.trim.lines.map(parse).toSet
+      """.stripMargin.trim.linesIterator.map(parse).toSet
 
     val result = bridges(components)
     result.foreach { b =>

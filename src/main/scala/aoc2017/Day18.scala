@@ -8,7 +8,8 @@ object Day18 extends Puzzle {
 
   override type Input = Seq[Instr]
 
-  override val input: Seq[Instr] = """
+  override val input: Seq[Instr] =
+    """
       |set i 31
       |set a 1
       |mul p 17
@@ -18,7 +19,7 @@ object Day18 extends Puzzle {
       |jgz i -2
       |add a -1
       |set i 127
-      |set p 952
+      |set p 316
       |mul p 8505
       |mod p a
       |mul p 129749
@@ -50,7 +51,7 @@ object Day18 extends Puzzle {
       |snd a
       |jgz f -16
       |jgz a -19
-    """.trim.stripMargin.lines.map(Instr.parse).toSeq
+      |""".trim.stripMargin.linesIterator.map(Instr.parse).toSeq
 
   type Reg = String
   type Val = Either[Long, Reg]
@@ -109,7 +110,7 @@ object Day18 extends Puzzle {
       |jgz a -1
       |set a 1
       |jgz a -2
-    """.trim.stripMargin.lines.map(Instr.parse).toSeq
+    """.trim.stripMargin.linesIterator.map(Instr.parse).toSeq
 
   case class Program(code: Seq[Instr]) {
     private var pos = 0
@@ -180,7 +181,7 @@ object Day18 extends Puzzle {
       |rcv b
       |rcv c
       |rcv d
-    """.trim.stripMargin.lines.map(Instr.parse).toSeq
+    """.trim.stripMargin.linesIterator.map(Instr.parse).toSeq
 
   case class Thread(code: Seq[Instr], pid: Int) {
     val program = Program(code)
